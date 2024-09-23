@@ -18,16 +18,13 @@ Este proyecto implementa un simulador de gestión de memoria que utiliza algorit
 2. Se puede visualizar el estado de la memoria y la cola de procesos en cada instante de tiempo.
 3. Al finalizar, se muestran estadísticas como los tiempos de retorno y espera por proceso.
 
-### Comandos
+## Comandos
 Para ejecutar el programa, simplemente ejecuta:
 ```bash
-python main.py
-
-
+ python main.py
+```
 ## Formato de Entrada
 El archivo `procesos.txt` debe tener el siguiente formato:
-
-Cada linea debe estar confomada de la siguiente manera:
 
 'id tamaño arribo irrupcion'
 
@@ -47,3 +44,4 @@ No puede haber mas de 10 lineas ya que ese es el tope de procesos aceptados en c
 
 ## Estado del Proyecto
 El proyecto está en desarrollo, se planea agregar más funcionalidades en el futuro.
+

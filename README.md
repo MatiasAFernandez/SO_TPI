@@ -10,7 +10,7 @@ Este proyecto implementa un simulador de gestión de memoria que utiliza algorit
 ## Instalación
 1. Clona este repositorio:
    ```bash
-   git clone https://github.com/usuario/simulador_memoria.git
+   git clone https://github.com/MatiasAFernandez/SO_TPI.git
    ```
 
 ## Uso

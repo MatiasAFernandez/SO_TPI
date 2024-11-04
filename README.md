@@ -30,7 +30,7 @@ El archivo `procesos.txt` debe tener el siguiente formato:
 
 No puede haber mas de 10 lineas ya que ese es el tope de procesos aceptados en cada procesamiento.
 
-'id': esto va dentro del txt?
+'id': identificador del proceso
 'tamaño': Tamaño en KB del proceso 
 'arribo': Tiempo de llegada del proceso al sistema
 'irrupcion': Tiempo de ejecución requerido por el proceso

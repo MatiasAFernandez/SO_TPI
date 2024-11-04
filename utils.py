@@ -74,10 +74,15 @@ def mostrar_memoria(memoria):
             id_proceso = particion['proceso']['id']
         else:
             id_proceso = "Libre"
-        print(f"Partición {particion['id']} - Inicio: {particion['inicio']}K, Tamaño: {particion['tamaño']}K, "
-              f"Proceso: {id_proceso}, Fragmentación Interna: {particion['fragmentacion']}K")
+        print(f"Partición {particion['id']} - Inicio: {particion['inicio']}Kb, Tamaño: {particion['tamaño']}Kb, "
+              f"Proceso: {id_proceso}, Fragmentación Interna: {particion['fragmentacion']}Kb")
 
 def mostrar_cola_listos(cola_listos):
-    print("\nCola de procesos listos (esperando asignación o ejecución):")
+    print("\nCola de procesos listos:")
     for proceso in cola_listos:
-        print(f"Proceso {proceso['id']} - Tamaño: {proceso['tamaño']}K, Tiempo Restante: {proceso['restante']}")
+        print(f"Proceso {proceso['id']} - Tamaño: {proceso['tamaño']}Kb, Tiempo Restante: {proceso['restante']}")
+
+def mostrar_cola_suspendidos(cola_suspendidos):
+    print("\nCola de procesos suspendidos:")
+    for proceso in cola_suspendidos:
+        print(f"Proceso {proceso['id']} - Tamaño: {proceso['tamaño']}Kb, Tiempo Restante: {proceso['restante']}")

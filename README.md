@@ -2,7 +2,7 @@
 
 ## Descripción
 Este proyecto implementa un simulador de gestión de memoria que utiliza algoritmos de asignación de memoria como el *Worst Fit* y planificación de procesos con *Round Robin*. Simula el comportamiento del sistema de memoria y procesos dentro de un sistema operativo.
-El isitema contará con tres particiones de memoria con las siguientes características:
+El sistema contará con tres particiones de memoria con las siguientes características:
 ```
 Partición: 1, 'dirección de inicio': 100, 'tamaño': 250 
 Partición: 2, 'dirección de inicio': 350, 'tamaño': 150 

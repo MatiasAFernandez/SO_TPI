@@ -4,14 +4,16 @@
 Este proyecto implementa un simulador de gestión de memoria que utiliza algoritmos de asignación de memoria como el *Worst Fit* y planificación de procesos con *Round Robin*. Simula el comportamiento del sistema de memoria y procesos dentro de un sistema operativo.
 
 ## Requisitos Previos
+```
 - Python 3.11 o superior
 - No requiere dependencias adicionales
+```
 
 ## Instalación
 1. Clona este repositorio:
-   ```bash
-   git clone https://github.com/MatiasAFernandez/SO_TPI.git
-   ```
+```bash
+git clone https://github.com/MatiasAFernandez/SO_TPI.git
+```
 
 ## Uso
 1. Al iniciar el simulador, se cargan los procesos desde el archivo `procesos.txt`.
@@ -49,13 +51,13 @@ Si la cantidad de procesos dentro del archivo leido superan los 10 procesos, sol
 primeros 10 procesos.
 
 ## Autores Grupo LIKE A PLAYER
-'''
+```
 -Altamirano Alejandro
 -Fernandez Matias
 -Judkevich Natasha Nicole
 -Maldonado Leandro
 -Ramirez Rocio
-'''
+```
 
 ## Estado del Proyecto
 El proyecto está en desarrollo, se planea agregar más funcionalidades en el futuro.

@@ -2,7 +2,12 @@
 
 ## Descripción
 Este proyecto implementa un simulador de gestión de memoria que utiliza algoritmos de asignación de memoria como el *Worst Fit* y planificación de procesos con *Round Robin*. Simula el comportamiento del sistema de memoria y procesos dentro de un sistema operativo.
-
+El isitema contará con tres particiones de memoria con las siguientes características:
+```
+Partición: 1, 'dirección de inicio': 100, 'tamaño': 250 
+Partición: 2, 'dirección de inicio': 350, 'tamaño': 150 
+Partición: 3, 'dirección de inicio': 500, 'tamaño': 50 
+```
 ## Requisitos Previos
 ```
 - Python 3.11 o superior
@@ -28,12 +33,14 @@ Para ejecutar el programa, simplemente ejecuta:
 ## Formato de Entrada
 El archivo `procesos.txt` debe tener el siguiente formato:
 
-'id tamaño arribo irrupcion'
+'`id` `tamaño` `arribo` `irrupcion`'
 
+```
 'id': identificador del proceso
 'tamaño': Tamaño en KB del proceso 
 'arribo': Tiempo de llegada del proceso al sistema
 'irrupcion': Tiempo de ejecución requerido por el proceso
+```
 
 Cada uno de los atributos son expresados con numeros naturales. Ejemplo:
 El proceso uno apareceria como:

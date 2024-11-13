@@ -1,9 +1,12 @@
-def cargar_procesos(ruta_archivo):
+def cargar_procesos(ruta_archivo, tamano_maximo_particion):
     procesos = []
     with open(ruta_archivo, 'r') as archivo:
         for linea in archivo:
+            if len(procesos) >= 10:
+                break
             id, tamaño, arribo, irrupcion = map(int, linea.strip().split())
-            procesos.append({'id': id, 'tamaño': tamaño, 'arribo': arribo, 'irrupcion': irrupcion, 'restante': irrupcion})
+            if tamaño <= tamano_maximo_particion:
+                procesos.append({'id': id, 'tamaño': tamaño, 'arribo': arribo, 'irrupcion': irrupcion, 'restante': irrupcion})
     return procesos
 
 def inicializar_memoria():
@@ -60,7 +63,7 @@ def round_robin(memoria, cola_listos, tiempo_actual, quantum=3):
 
             # Si el proceso alcanzó el quantum pero no ha terminado, lo movemos al tope de la cola
             elif tiempo_actual > 0 and tiempo_actual % quantum == 0:
-                print(f"Proceso {proceso_actual['id']} alcanzó el quantum, va al tope de la cola de listos.")
+                print(f"Proceso {proceso_actual['id']} alcanzó el quantum, va al inicio de la cola de listos.")
                 # No volvemos a asignar el proceso a memoria, pero lo reinsertamos en la cola
                 if proceso_actual not in cola_listos:
                     cola_listos.insert(0, proceso_actual)  # Lo reinsertamos al tope de la cola
@@ -69,13 +72,15 @@ def round_robin(memoria, cola_listos, tiempo_actual, quantum=3):
 
 def mostrar_memoria(memoria):
     print("\nTabla de particiones de memoria:")
+    headers = ["Partición", "Inicio", "Tamaño", "Proceso", "Fragmentación Interna"]
+    print(f"{headers[0]:<10} {headers[1]:<10} {headers[2]:<10} {headers[3]:<10} {headers[4]:<20}")
+    print("-" * 60)
     for particion in memoria:
         if particion['proceso']:
             id_proceso = particion['proceso']['id']
         else:
             id_proceso = "Libre"
-        print(f"Partición {particion['id']} - Inicio: {particion['inicio']}Kb, Tamaño: {particion['tamaño']}Kb, "
-              f"Proceso: {id_proceso}, Fragmentación Interna: {particion['fragmentacion']}Kb")
+        print(f"{particion['id']:<10} {particion['inicio']:<10} {particion['tamaño']:<10} {id_proceso:<10} {particion['fragmentacion']:<20}")
 
 def mostrar_cola_listos(cola_listos):
     print("\nCola de procesos listos:")

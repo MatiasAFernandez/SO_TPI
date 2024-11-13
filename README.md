@@ -28,19 +28,34 @@ El archivo `procesos.txt` debe tener el siguiente formato:
 
 'id tamaño arribo irrupcion'
 
-No puede haber mas de 10 lineas ya que ese es el tope de procesos aceptados en cada procesamiento.
-
 'id': identificador del proceso
 'tamaño': Tamaño en KB del proceso 
 'arribo': Tiempo de llegada del proceso al sistema
 'irrupcion': Tiempo de ejecución requerido por el proceso
 
+Cada uno de los atributos son expresados con numeros naturales. Ejemplo:
+El proceso uno apareceria como:
+1 80 0 5
+Donde 1 es el id del proceso, 80 es el tamaño en Kb que ocupará en meoria, 
+0 es el tiempo de arribo y 5 es el tiempo de irrupción.
+
+Cada linea del archivo representa un proceso.
+No puede haber mas de 10 lineas ya que ese es el tope de procesos aceptados en cada procesamiento.
+
+## Aclaraciones
+Los proceso cuyo tamaño sean mayores al de la partición de mayor tamaño serán descartados y no formarán
+parte de los procesos a simular.
+Si la cantidad de procesos dentro del archivo leido superan los 10 procesos, solo se tendran en cuenta los
+primeros 10 procesos.
+
 ## Autores Grupo LIKE A PLAYER
+'''
 -Altamirano Alejandro
 -Fernandez Matias
 -Judkevich Natasha Nicole
 -Maldonado Leandro
 -Ramirez Rocio
+'''
 
 ## Estado del Proyecto
 El proyecto está en desarrollo, se planea agregar más funcionalidades en el futuro.

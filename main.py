@@ -41,13 +41,13 @@ def simulador():
     if not ruta_archivo:
         print("No se seleccionó ningún archivo.")
         return
-    procesos = cargar_procesos(ruta_archivo)  # Cargar los procesos desde el archivo seleccionado
     memoria = inicializar_memoria()           # Inicializar las particiones de memoria
+    tamano_maximo_particion = max(part['tamaño'] for part in memoria)
+    procesos = cargar_procesos(ruta_archivo, tamano_maximo_particion)  # Cargar los procesos desde el archivo seleccionado
     cola_listos = []                          # Cola de procesos listos para asignación de memoria (FIFO)
     cola_suspendidos = []                     # Cola de procesos suspendidos
     tiempo_actual = 0                         # Tiempo del sistema
     quantum = 3  # Definimos el quantum
-    tamano_maximo_particion = max(part['tamaño'] for part in memoria)
     estadisticas_procesos = []
     procesos_terminados = 0
     proceso_en_ejecucion = None
@@ -60,13 +60,14 @@ def simulador():
     mostrar_memoria(memoria)
     input("\nPresiona Enter para comenzar la simulación...")
 
+    finalizar = False
+
     while procesos or cola_listos or cola_suspendidos or any(part['proceso'] for part in memoria):
         print("\nTiempo actual:", tiempo_actual)
-        while procesos and procesos[0]['arribo'] <= tiempo_actual:
-            proceso = procesos.pop(0)
-            if proceso['tamaño'] > tamano_maximo_particion:
-                print(f"Proceso {proceso['id']} eliminado: tamaño {proceso['tamaño']}Kb es mayor que cualquier partición disponible.")
-                continue
+        # Extraer todos los procesos cuyo tiempo de arribo es menor o igual al tiempo actual
+        procesos_a_arribar = [proceso for proceso in procesos if proceso['arribo'] <= tiempo_actual]
+        for proceso in procesos_a_arribar:
+            procesos.remove(proceso)
             print(f"Nuevo proceso {proceso['id']} ha arribado en el instante {tiempo_actual}.")
             if worst_fit_asignacion(proceso, memoria):
                 print(f"Proceso {proceso['id']} asignado a memoria en el instante {tiempo_actual}.")
@@ -99,7 +100,7 @@ def simulador():
                         cola_listos.insert(0, cola_suspendidos.pop(i))  # Insertar al principio de la cola de listos
                         break
             elif quantum_restante <= 0:
-                print(f"Proceso {proceso_en_ejecucion['id']} alcanzó el quantum, va al tope de la cola de listos.")
+                print(f"Proceso {proceso_en_ejecucion['id']} alcanzó el quantum, va al inicio de la cola de listos.")
                 cola_listos.insert(0, proceso_en_ejecucion)  # Insertar al principio de la cola de listos
                 proceso_en_ejecucion = None
                 quantum_restante = quantum
@@ -111,15 +112,37 @@ def simulador():
         mostrar_memoria(memoria)
         mostrar_cola_listos(cola_listos)
         mostrar_cola_suspendidos(cola_suspendidos)
-        input("\nPresiona Enter para avanzar al siguiente instante...")
+        
+        if not finalizar:
+            while True:
+                comando = input("\nPresiona Enter para avanzar al siguiente instante o escriba 'final' y presiona Enter para terminar la simulación: ")
+                if comando.lower() == "final":
+                    finalizar = True
+                    break
+                elif comando == "":
+                    break
+                else:
+                    print("Comando incorrecto.")
         tiempo_actual += 1
 
     print("\nSimulación completa.")
     print("\n--- Tiempos de Retorno (TR) y Tiempos de Espera (TE) por proceso ---")
+    total_tr = 0
+    total_te = 0
     for estadistica in estadisticas_procesos:
         print(f"Proceso {estadistica['id']} - TR: {estadistica['TR']} - TE: {estadistica['TE']}")
+        total_tr += estadistica['TR']
+        total_te += estadistica['TE']
+    
+    if procesos_terminados > 0:
+        tr_promedio = total_tr / procesos_terminados
+        te_promedio = total_te / procesos_terminados
+        print(f"\nTiempo de Retorno Promedio: {tr_promedio:.2f}")
+        print(f"Tiempo de Espera Promedio: {te_promedio:.2f}")
+
     if tiempo_actual > 0 and procesos_terminados > 0:
-        rendimiento = procesos_terminados / tiempo_actual
+        rendimiento = procesos_terminados / (tiempo_actual - 1)
+        print(f"\nInstante final de la simulación: {tiempo_actual - 1} unidades de tiempo.")
         print(f"\nRendimiento del sistema: {rendimiento:.2f} procesos terminados por unidad de tiempo.\n")
     else:
         print("\nNo se pudo calcular el rendimiento del sistema.\n")

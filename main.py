@@ -106,6 +106,7 @@ def simulador():
                 quantum_restante = quantum
 
         if not proceso_en_ejecucion and cola_listos:
+            print(f"Proceso {cola_listos[-1]['id']} en ejecución en el instante {tiempo_actual}.")
             proceso_en_ejecucion = cola_listos.pop()  # Obtener el último proceso de la cola de listos
             quantum_restante = quantum
 

@@ -26,10 +26,12 @@ git clone https://github.com/MatiasAFernandez/SO_TPI.git
 3. Al finalizar, se muestran estadísticas como los tiempos de retorno y espera por proceso.
 
 ## Comandos
-Para ejecutar el programa, simplemente ejecuta:
+Para ejecutar el programa, simplemente ejecuta en una terminal:
 ```bash
  python main.py
 ```
+Alternativamente se puede ejecutar usando el archivo `run.bat`
+
 ## Formato de Entrada
 El archivo `procesos.txt` debe tener el siguiente formato:
 
